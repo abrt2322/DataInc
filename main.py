@@ -3,8 +3,8 @@ import os
 import cv2
 
 DATA_DIR = './'  # データディレクトリ
-IMAGE_NAME = 'sample.jpg'  # 対象画像ファイル
-SAVE_DIR = os.path.join(DATA_DIR, 'preview')  # 生成画像の保存先ディレクトリ
+IMAGE_NAME = 'sample2.jpg'  # 対象画像ファイル
+SAVE_DIR = os.path.join(DATA_DIR, 'preview2')  # 生成画像の保存先ディレクトリ
 
 datagen = ImageDataGenerator(
     rotation_range=40,
@@ -26,7 +26,7 @@ if not os.path.exists(SAVE_DIR):
 # 指定したディレクトリに生成画像を保存する。
 i = 0
 for batch in datagen.flow(img_array, batch_size=1,
-                          save_to_dir=SAVE_DIR, save_prefix='dog', save_format='jpeg'):
+                          save_to_dir=SAVE_DIR, save_prefix='sample', save_format='jpeg'):
     i += 1
     if i == 10:
         break  # 停止しないと無限ループ
