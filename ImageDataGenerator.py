@@ -1,7 +1,9 @@
+import keras
 import numpy as np
+from keras.utils import np_utils
+from matplotlib import pyplot as plt
 from keras.preprocessing import image
 from keras.preprocessing.image import ImageDataGenerator
-from matplotlib import pyplot as plt
 
 img = image.load_img("sample.jpg")
 x = image.img_to_array(img)
@@ -29,8 +31,8 @@ datagen = ImageDataGenerator(
 )
 
 max_img_num = 16
-imgs =[]
-for d in datagen.flow(x , batch_size = 1):
+imgs = []
+for d in datagen.flow(x, batch_size = 1):
     imgs.append(image.array_to_img(d[0], scale=True))
     if (len(imgs) % max_img_num) == 0:
         break
