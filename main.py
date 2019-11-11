@@ -26,7 +26,7 @@ if not os.path.exists(SAVE_DIR):
 # 指定したディレクトリに生成画像を保存する。
 i = 0
 for batch in datagen.flow(img_array, batch_size=1,
-                          save_to_dir=SAVE_DIR, save_prefix='dog', save_format='jpeg'):
+                          save_to_dir=SAVE_DIR, save_prefix='sample', save_format='jpg'):
     i += 1
     if i == 10:
         break  # 停止しないと無限ループ
