@@ -1,25 +1,32 @@
-import sub
-from keras.preprocessing import image
-import numpy as np
 from keras.preprocessing.image import ImageDataGenerator
+import os
+import cv2
 
-img = image.load_img("sample.jpg")
-x = image.img_to_array(img)
-x = np.expand_dims(x, axis=0)
-print(x.shape)
+DATA_DIR = './'  # データディレクトリ
+IMAGE_NAME = 'sample.jpg'  # 対象画像ファイル
+SAVE_DIR = os.path.join(DATA_DIR, 'preview')  # 生成画像の保存先ディレクトリ
 
 datagen = ImageDataGenerator(
-    rotation_range=30,
+    rotation_range=40,
     width_shift_range=0.2,
     height_shift_range=0.2,
+    shear_range=0.2,
+    zoom_range=0.2,
     horizontal_flip=True,
-    channel_shift_range=100
-)
+    fill_mode='nearest')
 
-max_img_num = 16
-imgs = []
-for d in datagen.flow(x, batch_size=1):
-    imgs.append(image.array_to_img(d[0], scale=True))
-    if (len(imgs) % max_img_num) == 0:
-        break
-sub.show_imgs(imgs, row=4, col=4)
+img_array = cv2.imread(os.path.join(DATA_DIR, IMAGE_NAME), )  # 画像読み込み
+img_array = img_array.reshape((1,) + img_array.shape)  # 4次元データに変換（flow()に渡すため）
+
+# 保存先ディレクトリが存在しない場合、作成する。
+if not os.path.exists(SAVE_DIR):
+    os.makedirs(SAVE_DIR)
+
+# flow()により、ランダム変換したイメージのバッチを作成。
+# 指定したディレクトリに生成画像を保存する。
+i = 0
+for batch in datagen.flow(img_array, batch_size=1,
+                          save_to_dir=SAVE_DIR, save_prefix='dog', save_format='jpeg'):
+    i += 1
+    if i == 10:
+        break  # 停止しないと無限ループ
