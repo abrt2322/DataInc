@@ -20,18 +20,18 @@ def show_imgs(imgs, row, col):
         plt.imshow(img)
     plt.show()
 
-    datagen = ImageDataGenerator(
+datagen = ImageDataGenerator(
     rotation_range=30,
     width_shift_range=0.2,
     height_shift_range=0.2,
     horizontal_flip=True,
     channel_shift_range=100
-    )
+)
 
-    max_img_num = 16
-    imgs =[]
-    for d in datagen.flow(x , batch_size = 1):
-        imgs.append(image.array_to_img(d[0], scale=True))
-        if (len(imgs) % max_img_num) == 0:
-            break
-    show_imgs(imgs, row=4, col=4)
+max_img_num = 16
+imgs =[]
+for d in datagen.flow(x , batch_size = 1):
+    imgs.append(image.array_to_img(d[0], scale=True))
+    if (len(imgs) % max_img_num) == 0:
+        break
+show_imgs(imgs, row=4, col=4)
