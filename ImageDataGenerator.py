@@ -1,9 +1,7 @@
-import keras
 import numpy as np
-from keras.utils import np_utils
-from matplotlib import pyplot as plt
 from keras.preprocessing import image
 from keras.preprocessing.image import ImageDataGenerator
+from matplotlib import pyplot as plt
 
 img = image.load_img("sample.jpg")
 x = image.img_to_array(img)
