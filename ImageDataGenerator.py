@@ -18,7 +18,7 @@ def show_imgs(imgs, row, col):
         plt.tick_params(labalbottom="off")
         plt.tick_params(labelleft="off")
         plt.imshow(img)
-        plt.show()
+    plt.show()
 
     datagen = ImageDataGenerator(
     rotation_range=30,
