@@ -12,9 +12,7 @@ import os
 #各画素値に値を足す:0.3~1.0の範囲で値を変更する
 
 DATA_DIR = './'
-SAVE_DIR = os.path.join(DATA_DIR, 'test_saves1')  # 生成画像の保存先ディレクトリ
-
-
+SAVE_DIR = os.path.join(DATA_DIR, 'A_D4')  # 生成画像の保存先ディレクトリ
 if not os.path.exists(SAVE_DIR):
     os.makedirs(SAVE_DIR)
 
@@ -28,7 +26,7 @@ if not os.path.exists(SAVE_DIR):
 #plt.show()
 
 
-# -90 - 90の範囲でランダムに回転
+
 datagen = ImageDataGenerator(
     rotation_range=15,
     height_shift_range=0.2,
@@ -39,9 +37,7 @@ datagen = ImageDataGenerator(
     brightness_range=[0.3,1.0]
 )
 
-# generatorから9個の画像を生成
-# 今回は1枚のみなのでbatch_sizeは1
-for picture in list_pictures('./テスト/'):
+for picture in list_pictures('./D4/'):
     img = img_to_array(load_img(picture, target_size=(200,150)))
 
     # numpyの配列に変換
@@ -51,7 +47,6 @@ for picture in list_pictures('./テスト/'):
     # x = np.expand_dims(x, axis=0)
     x = x.reshape((1,) + x.shape)
 
-    # -90 - 90の範囲でランダムに回転
     print(x.shape)
 
     g = datagen.flow(x, batch_size=1, save_to_dir=SAVE_DIR, save_prefix='sample', save_format='jpg')
@@ -67,4 +62,4 @@ for picture in list_pictures('./テスト/'):
         #plt.imshow(gen_img)
         #plt.axis('off')
 
-plt.show()
+
