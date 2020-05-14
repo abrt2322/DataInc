@@ -13,7 +13,7 @@ from PIL import Image
 # 各画素値に値を足す:0.3~1.0の範囲で値を変更する
 
 # ---- 分類するクラス --- #
-classes = ["3FWC前", "3F階段踊り場", "4FWC前", "4F階段踊り場", "D4HR前", "D5HR前", "西垣前"]
+classes = ["無"]
 
 # ---- 画像の大きさを設定 ---- #
 img_width, img_height = 1600, 1200
@@ -22,7 +22,7 @@ img_width, img_height = 1600, 1200
 DATA_DIR = [""] * len(classes)
 SAVE_DIR = [""] * len(classes)
 for i in range(len(classes)):
-    DATA_DIR[i] = 'data/' + classes[i]
+    DATA_DIR[i] = '0113/' + classes[i]
     SAVE_DIR[i] = os.path.join('output/', classes[i])  # 生成画像の保存先ディレクトリ
     if not os.path.exists(SAVE_DIR[i]):
         os.makedirs(SAVE_DIR[i])
@@ -60,7 +60,7 @@ for i in range(len(classes)):
         # print(x.shape)
 
         g = datagen.flow(x, batch_size=1, save_to_dir=SAVE_DIR[i], save_prefix='out', save_format='jpg')
-        for j in range(16):
+        for j in range(3):
             batches = g.next()
 
             # （1,縦サイズ, 横サイズ, チャンネル数)
